@@ -46,7 +46,7 @@
           <geometry>
             <!-- Collision mesh -->
             <mesh>
-              <uri>/root/ros2_jazzy_ws/src/auto_drive_car/auto_drive/world/field1.dae</uri>
+              <uri>/data/auto_driver_car/src/auto_drive_car/auto_drive/world/field1.dae</uri>
             </mesh>
           </geometry>
         </collision>
@@ -54,16 +54,34 @@
           <geometry>
             <!-- Visual mesh -->
             <mesh>
-              <uri>/root/ros2_jazzy_ws/src/auto_drive_car/auto_drive/world/field1.dae</uri>
+              <uri>/data/auto_driver_car/src/auto_drive_car/auto_drive/world/field1.dae</uri>
             </mesh>
           </geometry>
         </visual>
       </link>
     </model>
 
-    <include>
-      <uri>/root/ros2_jazzy_ws/src/auto_drive_car/auto_drive/world/stop.sdf</uri>
-      <pose>-3.17 2.0 0.3 0.0 1.5708 0.0</pose>
-    </include>
+    <model name="stop_sign">
+      <pose>0 0 0 0 0 0</pose>
+      <static>true</static>
+      <link name="field_link">
+        <collision name="collision">
+          <geometry>
+            <!-- Collision mesh -->
+            <mesh>
+              <uri>/data/auto_driver_car/src/auto_drive_car/auto_drive/world/field1.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <!-- Visual mesh -->
+            <mesh>
+              <uri>/data/auto_driver_car/src/auto_drive_car/auto_drive/world/stop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
   </world>
 </sdf>

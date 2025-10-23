@@ -27,7 +27,9 @@ setup(
         ],
     },
     entry_points={
-        'console_scripts': [
+        'console_scripts': [ 
+            'auto_drive_node = auto_drive.auto_drive_node:main',
+            'auto_drive_node_traffic = auto_drive.auto_drive_node_traffic:main'
         ],
     },
 )
