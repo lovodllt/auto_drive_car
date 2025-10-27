@@ -46,7 +46,7 @@ class AutoDriveNode(Node):
         except ZeroDivisionError:
             self.get_logger().error("No yellow line detected.")
             self.yaw_speed = 0.0
-            self.linear_velocity
+            self.linear_velocity = 0.0
             pass
 
     def timer_callback(self):

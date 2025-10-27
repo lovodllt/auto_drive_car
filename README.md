@@ -8,7 +8,7 @@
 
 信号灯
 `ros2 launch auto_drive auto_drive_env.launch.py yaw:=1.5708`
-`ros2 run auto_drive auto_drive_node_traffic `
+`ros2 run auto_drive auto_drive_node_traffic`
 
 slam
 依赖
