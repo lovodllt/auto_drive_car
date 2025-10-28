@@ -62,7 +62,7 @@
     </model>
 
     <model name="stop_sign">
-      <pose>0 0 0 0 0 0</pose>
+      <pose>-4.5 1.5 0.3 0 1.5738 0</pose>
       <static>true</static>
       <link name="field_link">
         <collision name="collision">

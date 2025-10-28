@@ -19,3 +19,15 @@ slam
 `ros2 run nav2_map_server map_saver_cli -f /data/auto_driver_car/install/auto_drive/share/auto_drive/maps/my_map`
 运行地图
 `ros2 launch auto_drive auto_drive_env.launch.py   localization:=true   map:=/data/auto_driver_car/install/auto_drive/share/auto_drive/maps/my_map.yaml   rviz:=true   nav2:=true`
+
+
+
+自动地图
+
+`ros2 launch auto_drive auto_drive_env.launch.py yaw:=1.5708 slam:=true nav2:=true rviz:=true`
+
+`ros2 run auto_drive auto_drive_node_slam`
+
+`/opt/ros/jazzy/share/turtlebot4_navigation/config/nav2.yaml`
+
+替换 controller_server

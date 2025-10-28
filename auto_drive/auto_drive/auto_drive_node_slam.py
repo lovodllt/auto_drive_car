@@ -50,7 +50,9 @@ class ADNode(Node):
         os.system(self.create_red_light_cmd)
         # os.system(self.create_green_light_cmd)
 
-        self.change_traffic_light_thread = Thread(target=self.change_traffic_light)
+        self.change_traffic_light_thread = None
+
+        self.had_stopped = False
 
         # navigation
         self.navigator = BasicNavigator()
@@ -105,6 +107,15 @@ class ADNode(Node):
         goal_pose4.pose.orientation.z = 0.0
         goal_poses.append(goal_pose4)
 
+        goal_pose5 = PoseStamped()
+        goal_pose5.header.frame_id = 'map'
+        goal_pose5.header.stamp = self.navigator.get_clock().now().to_msg()
+        goal_pose5.pose.position.x = 0.0
+        goal_pose5.pose.position.y = 0.0
+        goal_pose5.pose.orientation.w = 1.0
+        goal_pose5.pose.orientation.z = 0.0
+        goal_poses.append(goal_pose5)
+
         self.navigator.goThroughPoses(goal_poses)
 
         while not self.navigator.isTaskComplete():
@@ -133,8 +144,6 @@ class ADNode(Node):
         # filter out yellow line
         mask = cv2.inRange(hsv_img, lower_yellow, upper_yellow)
 
-        # cv2.imwrite(f'/home/zwz/turtlebot4_ws/src/auto_drive/auto_drive/imgs/{self.cnt}.png', cv_img)
-        # self.cnt += 1
         cv2.imshow('img', cv_img)
         cv2.waitKey(1)
 
@@ -172,11 +181,11 @@ class ADNode(Node):
                 self.change_traffic_light_thread.start()  
         if green_mse < 5000:
             self.linear_speed = 1.2
-        if stop_mse < 3000:
+        if stop_mse < 9000 and not self.had_stopped:
             self.linear_speed = 0
-            time.sleep(7)
+            self.had_stopped = True
+            time.sleep(5)
             self.linear_speed = 1.2
-            time.sleep(2)
 
         try:
             x_center = moments['m10'] / moments['m00']
@@ -184,7 +193,6 @@ class ADNode(Node):
         except:
             self.get_logger().error("ERROR:moments['m00'] == 0")
             pass
-
 
     def timer_callback(self):
         msg = Twist()
